@@ -1,0 +1,70 @@
+create table giants_player( pid int(4), pname varchar(15), pposition varchar(10), pdate varchar(8), pgrade varchar(1), primary key(pid));
+
+create table purchase(
+    -> no varchar(10),
+    -> cust_id varchar(10),
+    -> date varchar(10),
+    -> product varchar(40),
+    -> primary key(no),
+    -> foreign key(cust_id) REFERENCES customer1(id));
+
+insert into customer1 values('hong', '홍길동', 22, '경기');
+insert into purchase values(5, 'john', '03/11', '비디오');
+
+select id, name from customer1 order by id desc;
+select id, name from customer1 where customer1.age >= 25;
+update customer1 set address = '경기' where id = 'ppuni';
+select avg(age) from customer1 where address = '경기';
+select count(*) from purchase where product = 'TV';
+delete from purchase where no = 4;
+
+
+
+
+
+
+create table giants_player(
+pid int(4) not null,
+pname varchar(15),
+pposition varchar(10),
+pdate varchar(8),
+pgrade varchar(1),
+primary key(pid));
+
+insert into giants_player values (1001,'스트레일리','투수','20200321','C');
+insert into giants_player values (1002,'나균안','투수','20170221','S');
+insert into giants_player values (1003,'이대호','내야수','20210301','A');
+
+create table giants_coach(
+cid char(3) not null primary key,
+cname varchar(15),
+cposition varchar(10),
+cdate char(8)
+);
+
+insert into giants_coach values ('c01','배영수','투수','20230101');
+insert into giants_coach values ('c02','박흥식','내야수','20210218');
+insert into giants_coach values ('c03','전준호','외야수','20221026');
+
+create table giants_money(
+pid int(4),
+pcost int(5),
+cid char(3),
+ccost int(5),
+primary key(pid,cid),
+foreign key(pid) REFERENCES giants_player(pid) ON DELETE CASCADE,
+foreign key(cid) REFERENCES giants_coach(cid) ON DELETE CASCADE
+);
+
+insert into giants_money values (1001,10000,'c01',7000);
+insert into giants_money values (1002,8000,'c01',7000);
+insert into giants_money values (1003,15000,'c02',6000);
+
+
+
+1) select pname, pgrade, pcost from giants_player as gp, giants_money as gm where gp.pid = gm.pid order by pcost desc;
+
+2) select pposition, sum(pcost) from giants_player as gp, giants_money as gm where gp.pid = gm.pid order by sum(pcost) desc;
+
+3) select count(cname) as 코치, count(pname) as 선수 from giants_player, giants_coach;
+
