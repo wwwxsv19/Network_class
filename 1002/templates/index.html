@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>롯데자이언츠 선수 등록</title>
+    <script>
+        function join() {
+            let num = document.querySelector("#number").value;
+            let name = document.querySelector("#name").value;
+            let position = document.querySelector("#position").value;
+            let date = document.querySelector("#date").value;
+            let grade = document.querySelector("#grade").value;
+            
+            let formData = new FormData();
+
+            formData.append('pid', num);
+            formData.append('pname', name);
+            formData.append('pposition', position);
+            formData.append('pdate', date);
+            formData.append('pgrade', grade);
+
+            fetch('/join', { method: "POST", body: formData }).then((res) => res.json()).then((data) => {
+                alert(data["msg"]);
+                window.location.reload();
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" , id="number">
+            <label for="floatingInput">번호</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" , id="name">
+            <label for="floatingInput">선수 이름</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" , id="position">
+            <label for="floatingInput">선수 포지션</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" , id="date">
+            <label for="floatingInput">선수 등록일</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" , id="grade">
+            <label for="floatingInput">선수 등급</label>
+        </div>
+        <button onclick="join()" type="button" class="btn btn-success">등록</button>
+    </div>
+</body>
+
+</html>
