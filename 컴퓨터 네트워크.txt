@@ -68,3 +68,9 @@ insert into giants_money values (1003,15000,'c02',6000);
 
 3) select count(cname) as 코치, count(pname) as 선수 from giants_player, giants_coach;
 
+
+create table record_led(
+	id int auto_increment primary key,
+	status varchar(5) not null,
+	create_at datetime not null default current_timestamp()
+);
