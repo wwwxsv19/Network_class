@@ -74,3 +74,16 @@ create table record_led(
 	status varchar(5) not null,
 	create_at datetime not null default current_timestamp()
 );
+
+
+create table record_dht(
+    id int(11) NOT NULL AUTO_INCREMENT,
+    temperature varchar(5) NOT NULL,
+    humidity varchar(5) NOT NULL,
+    create_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    primary key(id)
+    );
+
+
+
+
